@@ -1,5 +1,5 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
-from fhir.datatypes import *
+from datatypes import *
 import json
 import logging
 import re

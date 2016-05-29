@@ -20,7 +20,7 @@ import logging
 import json
 import sys
 from enum import Enum
-from fhir.generated import OperationOutcome
+from generated import OperationOutcome
 
 # conditional import to comply with python3
 try:

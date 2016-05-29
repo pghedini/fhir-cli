@@ -153,9 +153,9 @@ import sys
 import re
 import shlex, subprocess
 import json
-from fhir.rest import init_client, Verbosity
-from fhir.datatypes import *
-from fhir.generated import *
+from rest import init_client, Verbosity
+from datatypes import *
+from generated import *
 
 LOW = Verbosity.low
 MEDIUM = Verbosity.medium
