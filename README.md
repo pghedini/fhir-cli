@@ -30,17 +30,17 @@ Several FHIR operations are supported:
 **FHIR CLI** is tested to be used in python 2.7 and python 3.X.
 
 It requires the python modules:
-- datetime
-- dateutil.parser
-- json
-- os
-- re
-- shlex
-- subprocess
-- sys
+- datetime (use "pip install datetime" to install)
+- dateutil.parser (use "pip install python-dateutil" to install)
+- json (use "pip install simplejson" to install)
+- os (normally already installed)
+- re (normally already installed)
+- shlex (normally already installed)
+- subprocess (normally already installed)
+- sys (normally already installed)
 
 Optional modules:
-- logging
+- logging (use "pip install logging" to install)
  
 ## To initialize the client
 
