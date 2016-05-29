@@ -32,6 +32,7 @@ Several FHIR operations are supported:
 It requires the python modules:
 - datetime (use "pip install datetime" to install)
 - dateutil.parser (use "pip install python-dateutil" to install)
+- Enum (use "pip install Enum" to install)
 - json (use "pip install simplejson" to install)
 - os (normally already installed)
 - re (normally already installed)
