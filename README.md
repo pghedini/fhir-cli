@@ -44,10 +44,10 @@ Optional modules:
  
 ## To initialize the client
 
-import the library **fhir.client** and load the json library (not mandatory)
+import the library **client** and load the json library (not mandatory)
 
 ```
-from fhir.client import *
+from client import *
 import json # not mandatory
 ````
 
