@@ -6,6 +6,7 @@ HL7 FHIR CLI (Command Line Interface) an easy to use python interface to HL7 FHI
 
 Author: **Pierfrancesco Ghedini**
 pierfrancesco.ghedini@gmail.com
+Site: **http://www.informaticasanitaria.it**
 
 Execute the commands listed in this README in a iPython interpreter - or an another interpreter, if you prefer - to experiment.
 
