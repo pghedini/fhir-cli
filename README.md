@@ -397,3 +397,83 @@ you can also use the browser to view div
 # view it in the browser
 !firefox file_name.html &
 ```
+
+## Validating a resource by means of a FHIR server
+
+Let's validate a resource in xml format...
+
+Store the resource in a variable called res
+
+```
+res = '''<Patient xmlns="http://hl7.org/fhir">
+  <id value="pat1"/>
+  <text>
+    <status value="generated"/>
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      
+      <p>Patient Donald DUCK @ Acme Healthcare, Inc. MR = 654321</p>
+    
+    </div>
+  </text>
+  <identifier>
+    <use value="usual"/>
+    <type>
+      <coding>
+        <system value="http://hl7.org/fhir/v2/0203"/>
+        <code value="MR"/>
+      </coding>
+    </type>
+    <system value="urn:oid:0.1.2.3.4.5.6.7"/>
+    <value value="654321"/>
+  </identifier>
+  <active value="true"/>
+  <name>
+    <use value="official"/>
+    <family value="Donald"/>
+    <given value="Duck"/>
+  </name>
+  <gender value="male"/>
+</Patient>'''
+
+```
+
+now execute the FHIR operation
+
+```
+resp = validate(cli, resource="Patient", par=res, format_acc="xml")
+```
+
+See the response code in order to check the operation result
+
+```
+resp.resp_code()
+```
+or simply type the variable name resp to display the output of the command
+
+```
+resp
+```
+
+To validate a resource in json format...
+
+Build a resource to test
+
+```
+pa = Patient({"resourceType":"Patient", "id": "pat1", "name":[{"family":["Donald"],"given":["TestName"],"use":"official"}]})
+# check the content of pa simply entering pa variable
+pa
+```
+
+and validate it.
+Pay attention: to obtain the json representation from Patient resource stored in "pa" variable, use pa.json
+
+```
+resp = validate(cli, resource="Patient", par=pa.json, format_acc="json")
+
+```
+
+See the response code in order to check the operation result
+
+```
+resp.resp_code()
+```
