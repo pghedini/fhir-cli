@@ -276,9 +276,24 @@ def validate(cli_ref, resource, mode=None, profile=None, par=None, format_acc="j
     
     return read_not_encoded_body(cli_ref, resource+"/$validate?async=false", params = text, use_post = True, format_acc=format_acc)
 
-def meta_add(cli_ref = None, resource = None, par = None, format_acc="json"):
+def meta_add(cli_ref=None, resource=None, par=None, format_acc="json"):
     '''
-    Meta-add Operator
+    Meta-add operator
+    This operation takes a meta, and adds the profiles, tags, and security labels found in it to the nominated resource.
+    This operation can also be used on historical entries - to update them without creating a different historical version.
+      
+    cli_ref -> init_client() instance
+    resource -> "resource-type" if resource type level,
+                "Resource/id" if individual level
+    par -> a list of profiles, tags and security labels to add
+            example of par ->
+                    {
+                        "system":"http://example.org/codes/tags",
+                        "code":"entered-by-hand",
+                        "display":"Patient File entered by hand"
+                    }
+    format_acc -> response format, example "json" or "xml" it is equivalent to the parameter _format=json
+               or _format=xml 
     '''
     
     logging.info("Entered in Function meta_add.")
@@ -288,7 +303,7 @@ def meta_add(cli_ref = None, resource = None, par = None, format_acc="json"):
         return None
 
     if format_acc == 'xml':
-        text = '<Parameters xmlns="http://hl7.org/fhir"><parameter><name value="meta"/><valueMeta>%s</valueMeta></parameter></Parameters>' % par
+        text = '<Parameters xmlns="http://hl7.org/fhir"><parameter><name value="meta"/><valueMeta><tag>%s</tag></valueMeta></parameter></Parameters>' % par
     else:
         text = {"resourceType":"Parameters",
                 "parameter":[
@@ -297,14 +312,29 @@ def meta_add(cli_ref = None, resource = None, par = None, format_acc="json"):
                         "valueMeta":{}                    }
                 ]
                 }
-        text["parameter"][0]["valueMeta"] = par
+        text["parameter"][0]["valueMeta"] = {"tag": par}
         print(text)
     
     return read_not_encoded_body(cli_ref, resource+"/$meta-add", params = text, use_post = True, format_acc=format_acc)
 
 def meta_delete(cli_ref = None, resource = None, par = None, format_acc="json"):
     '''
-    Meta-delete Operator
+    Meta-delete operator
+    This operation takes a meta, and deletes the profiles, tags, and security labels found in it from the nominated resource.
+    This operation can also be used on historical entries.
+      
+    cli_ref -> init_client() instance
+    resource -> "resource-type" if resource type level,
+                "Resource/id" if individual level
+    par -> a list of profiles, tags and security labels to delete
+            example of par ->
+                    {
+                        "system":"http://example.org/codes/tags",
+                        "code":"entered-by-hand",
+                        "display":"Patient File entered by hand"
+                    }
+    format_acc -> response format, example "json" or "xml" it is equivalent to the parameter _format=json
+               or _format=xml 
     '''
     
     logging.info("Entered in Function meta_delete.")
@@ -314,17 +344,18 @@ def meta_delete(cli_ref = None, resource = None, par = None, format_acc="json"):
         return None
 
     if format_acc == 'xml':
-        text = '<Parameters xmlns="http://hl7.org/fhir"><parameter><name value="meta"/><valueMeta>%s</valueMeta></parameter></Parameters>' % par
+        text = '<Parameters xmlns="http://hl7.org/fhir"><parameter><name value="meta"/><valueMeta><tag>%s</tag></valueMeta></parameter></Parameters>' % par
         print('Text: %s' % text)
     else:
         text = {"resourceType":"Parameters",
                 "parameter":[
                     {
                         "name":"meta",
-                        "valueMeta":{}                    }
-                ]
+                        "valueMeta":{}
+                    }
+                             ]
                 }
-        text["parameter"][0]["valueMeta"] = par
+        text["parameter"][0]["valueMeta"] = {"tag": par}
         print(text)
     
     return read_not_encoded_body(cli_ref, resource+"/$meta-delete", params = text, use_post = True, format_acc=format_acc)
