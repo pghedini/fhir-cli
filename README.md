@@ -477,3 +477,27 @@ See the response code in order to check the operation result
 ```
 resp.resp_code()
 ```
+
+## Meta
+
+Reading meta tags with $meta operator, Adding meta tags with $meta-add and Deleting meta tags with $meta-delete
+
+Read meta tags of an existing Patient
+
+```
+resp = meta(cli, "Patient/5149")
+```
+
+Add meta tags
+
+```
+in_par = [{"system":"http://example.org/codes/tags", "code":"record-lost", "display": "Patient File Lost"}]
+resp = meta_add(cli, "Patient/5149", par=in_par)
+```
+
+Delete meta tags
+
+```
+in_par = [{"system":"http://example.org/codes/tags", "code":"record-lost", "display": "Patient File Lost"}]
+resp = meta_delete(cli, "Patient/5149", par=in_par)
+```
