@@ -5,8 +5,6 @@ Created on 06 gen 2016
 
 Command Line Interface (CLI) to HL7 FHIR infrastructure
 
-Ultimo aggiornamento 29/12/2015
-
 '''
 from __future__ import absolute_import, division, print_function, unicode_literals
 __all__ = ['init_client', 'process_message', 'validate_local', 'validate',
