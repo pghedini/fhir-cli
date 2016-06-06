@@ -372,15 +372,6 @@ resp = search(cli, "Patient", Patient.search.profile_.EQ("http://hl7.org/fhir/St
 resp.obj()
 ```
 
-### Use of operation "document"
-
-```
-resp = document(cli, "Composition/example")
-bu = Bundle(resp.obj())
-for ent in bu.entry:
-    print(html2text(ent.resource["text"]["div"]))
-```
-
 ## Rendering resource Narrative in text and in a browser
 ```
 resp = read(cli, "MedicationDispense/meddisp001")
@@ -478,7 +469,7 @@ See the response code in order to check the operation result
 resp.resp_code()
 ```
 
-## Meta
+## Meta Operator
 
 Reading meta tags with $meta operator, Adding meta tags with $meta-add and Deleting meta tags with $meta-delete
 
@@ -500,4 +491,29 @@ Delete meta tags
 ```
 in_par = [{"system":"http://example.org/codes/tags", "code":"record-lost", "display": "Patient File Lost"}]
 resp = meta_delete(cli, "Patient/5149", par=in_par)
+```
+
+## Document Operator
+
+As FHIR Documentation says "FHIR resources can be used to build documents that represent a composition:
+a set of coherent information that is a statement of healthcare information, particularly including clinical observations and services.
+A document is an immutable set of resources with a fixed presentation that is authored and/or attested by humans, organizations and devices.
+Documents built in this fashion may be exchanged between systems and also persisted in document storage and management systems, including systems such as IHE XDS.
+Applications claiming conformance to this framework claim to be conformant to "FHIR documents"
+
+The FHIR Document Operator produces a document from a given composition.
+
+```
+resp = document(cli, "Composition/example")
+# resp is a bundle to decode
+bu = Bundle(resp.obj())
+# Now loop over bundle entries
+for ent in bu.entry:
+    print(html2text(ent.resource["text"]["div"]))
+```
+
+if you want to make the document persistent, set "persist" attribute to True
+
+```
+resp = document(cli, "Composition/example", persist=True)
 ```
