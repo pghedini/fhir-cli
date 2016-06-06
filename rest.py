@@ -5,13 +5,6 @@ Created on 06 gen 2016
 
 REST interface to HL7 FHIR infrastructure
 
-- mettere il verbo GET, PUT, ecc accanto a URL
-- verificare l'autenticazione basic
-- migliorare la gestione degli errori interpretando i codici di ritorno dal
-     server FHIR
-
-Ultimo aggiornamento 06/01/2016
-
 '''
 
 from __future__ import absolute_import, division, print_function, unicode_literals
@@ -64,22 +57,6 @@ class OperationOutcomes(object):
         '''
         Aggregator of OperationOutcome
         '''
-        """
-        self.outcomes = []
-        extra_obj = ''
-        for obj in response:
-            # This odd concatenation introducted to deal with an error in response of the test site
-            if (len(obj.lstrip()) > 0) and (obj.lstrip()[0] == '<'):
-                self.outcomes.append(obj)
-            else:
-                if (obj == '{\r\n') or (obj == '{\n'):
-                    extra_obj = obj
-                    continue
-                if len(obj.lstrip()) > 0:
-                    self.outcomes.append(OperationOutcome(eval(extra_obj + obj)))    
-                if (obj == '{\r\n') or (obj == '{\n'):
-                    extra_obj = ''
-        """
         self.json = ""
         for obj in response:
             print(obj)
@@ -91,12 +68,6 @@ class OperationOutcomes(object):
         '''
              Get the object representation
         '''
-        """
-        out_str = ""
-        for obj in self.outcomes:
-            out_str += obj.__repr__()
-        return out_str
-        """
         return str(self.json)
 
 class Resp(object):
@@ -305,8 +276,6 @@ class init_client(object):
                     con_log=False
                 
         default_url = "http://fhir3.healthintersections.com.au/open/"
-        #default_url = "http://fhir2.healthintersections.com.au/closed/"
-        #default_url = "https://fhir-open-api-dstu2.smarthealthit.org/"
 
         if url:
             self.url = url
@@ -572,5 +541,3 @@ class init_client(object):
 
 if __name__ == '__main__':
     pass
-
-        
