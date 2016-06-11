@@ -517,3 +517,39 @@ if you want to make the document persistent, set "persist" attribute to True
 ```
 resp = document(cli, "Composition/example", persist=True)
 ```
+
+## Everything Operator
+
+This operation is used to return all the information related to the resource on which this operation is invoked, Encounter and Patient.
+The response is a bundle of type "searchset".
+At a minimum, the patient/encounter resource itself is returned, along with any other resources that
+the server has that are related to the patient/encounter, and that are available for the given user.
+The server also returns whatever resources are needed to support the records - e.g.
+linked practitioners, medications, locations, organizations etc
+
+Two input parameters are:
+- start_date -> The date range relates to care dates, not record currency dates - e.g. all records relating to care provided in a certain date range. If no start date is provided, all records prior to the end date are in scope.
+- end_date ->  The date range relates to care dates, not record currency dates - e.g. all records relating to care provided in a certain date range. If no end date is provided, all records subsequent to the start date are in scope.
+
+```
+# Basic invocation on a Patient instance
+# 
+resp = everything(cli, "Patient/example")
+```
+
+The operator can also be executed on all Patients
+
+```
+# Invocation on all Patient resources
+# 
+resp = everything(cli, "Patient")
+```
+
+In the same way the command can be used on Encounters
+
+```
+# Basic invocation on an Encounter instance 
+resp = everything(cli, "Encounter/example")
+# Invocation on all Encounter resources
+resp = everything(cli, "Encounter")
+```

@@ -436,15 +436,15 @@ def translate(cli_ref = None, target=None, code=None, system=None, version=None,
 def everything(cli_ref=None, resource=None, start_date=None, end_date=None, format_acc="json"):
     '''
     Everything operator
-    This operation is used to return all the information related to the patient described
-    in the resource on which this operation is invoked. The response is a bundle of type "searchset".
-    At a minimum, the patient resource itself is returned, along with any other resources that
-    the server has that are related to the patient, and that are available for the given user.
-    The server also returns whatever resources are needed to support the records - e.g.
-    linked practitioners, medications, locations, organizations etc
+    This operation is used to return all the information related to the resource on which
+    this operation is invoked, Encounter and Patient. The response is a bundle of type "searchset".
+    At a minimum, the patient/encounter resource itself is returned, along with any other resources
+    that the server has that are related to the patient/encounter,
+    and that are available for the given user. The server also returns whatever resources are needed
+    to support the records - e.g. linked practitioners, medications, locations, organizations etc...
       
     cli_ref -> init_client() instance
-    resource -> "Patient"
+    resource -> "Patient" | "Encounter"
     start_date -> The date range relates to care dates, not record currency dates
                   - e.g. all records relating to care provided in a certain date range.
                   If no start date is provided, all records prior to the end date are in scope.
