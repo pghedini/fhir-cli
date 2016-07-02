@@ -25,7 +25,7 @@ Several FHIR operations are supported:
 - meta
 - etc...
 
-**FHIR CLI** supports DSTU2 and will support future versions of the standard.  
+**FHIR CLI** supports DSTU2 and STU 3 Candidate versions of the standard.  
 
 ## Requirements
 **FHIR CLI** is tested to be used in python 2.7 and python 3.X.
@@ -44,12 +44,19 @@ It requires the python modules:
 Optional modules:
 - logging (use "pip install logging" to install)
  
-## To initialize the client
+## To initialize the client (version DSTU2 and STU3 Candidate)
 
 import the library **client** and load the json library (not mandatory)
 
 ```
 from client import *
+import json # not mandatory
+````
+
+import the library **client_v3** if you want to use a version compliant with STU3 Candidate
+
+```
+from client_v3 import *
 import json # not mandatory
 ````
 
